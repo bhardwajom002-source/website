@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)file:///C:/xampp/htdocs/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Om Bhardwaj — Portfolio</title>
+    <meta name="description" content="Om Bhardwaj — Diploma in Computer Science, Government Polytechnic Manesar">
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --accent: #7c3aed;
+            --muted: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-2: rgba(255, 255, 255, 0.02);
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(180deg, #071129 0%, #081028 60%);
+            color: #e6eef8
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 24px
+        }
+
+        /* header / nav */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 12px
+        }
+
+        nav a.active {
+            color: #fff
+        }
+
+        /* hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 28px;
+            align-items: center;
+            margin-top: 28px
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--glass), transparent);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(6px)
+        }
+
+        .intro h1 {
+            font-size: 28px;
+            margin: 0 0 6px 0
+        }
+
+        .intro p {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        /* marquee / swap animation for institute name */
+        .marquee {
+            overflow: hidden;
+            padding: 6px 8px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            display: inline-block;
+            margin-top: 12px
+        }
+
+        .marquee .track {
+            display: inline-block;
+            white-space: nowrap;
+            animation: swap 6s linear infinite
+        }
+
+        @keyframes swap {
+            0% {
+                transform: translateY(0)
+            }
+
+            25% {
+                transform: translateY(-30px)
+            }
+
+            50% {
+                transform: translateY(-60px)
+            }
+
+            75% {
+                transform: translateY(-30px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        .track span {
+            display: block;
+            padding: 4px 12px
+        }
+
+        /* rocket name animation */
+        .rocket-wrap {
+            position: relative;
+            height: 220px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center
+        }
+
+        .rocket {
+            width: 120px;
+            height: 120px;
+            transform-origin: center bottom
+        }
+
+        .name-plate {
+            position: absolute;
+            bottom: 18px;
+            background: linear-gradient(90deg, #061021, #112033);
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .9s cubic-bezier(.2, .9, .2, 1)
+        }
+
+        .launch .rocket {
+            animation: launch 2.2s ease forwards
+        }
+
+        .launch .name-plate {
+            opacity: 1;
+            transform: translateY(-110px)
+        }
+
+        @keyframes launch {
+            0% {
+                transform: translateY(0) rotate(-8deg)
+            }
+
+            60% {
+                transform: translateY(-220px) rotate(6deg)
+            }
+
+            100% {
+                transform: translateY(-320px) rotate(0deg)
+            }
+        }
+
+        /* info cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 18px
+        }
+
+        .info-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--card)
+        }
+
+        .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--glass);
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .small {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        /* details page */
+        .hidden {
+            display: none
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #122033, #0b1a2b);
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        /* project list */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .project {
+            padding: 12px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent)
+        }
+
+        /* footer */
+        footer {
+            text-align: center;
+            color: var(--muted);
+            margin-top: 28px
+        }
+
+        /* responsive */
+        @media (max-width:880px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .rocket-wrap {
+                height: 180px
+            }
+
+            .name-plate {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="logo">OM</div>
+                <div>
+                    <div style="font-weight:700">OM BHARDWAJ</div>
+                    <div style="font-size:12px;color:var(--muted)">Diploma — Computer Science</div>
+                </div>
+            </div>
+            <nav>
+                <a href="file:///C:/xampp/htdocs/index.html#" id="link-home" class="active">Home</a>
+                <a href="file:///C:/xampp/htdocs/index.html#" id="link-about" class="">About</a>
+                <a href="file:///C:/xampp/htdocs/index.html#" id="link-contact" class="">Contact</a>
+            </nav>
+        </header>
+
+        <!-- HOME / PAGE 1 -->
+        <main id="page-home" class="">
+            <div class="hero">
+                <div class="card intro">
+                    <h1>Hello — I'm <strong>Om Bhardwaj</strong></h1>
+                    <p>Currently studying Diploma in Computer Science at</p>
+                    <div class="marquee card" style="display:inline-block">
+                        <div class="track">
+                            <span>Government Polytechnic Manesar</span>
+                            <span>Government Polytechnic Manesar</span>
+                            <span>Government Polytechnic Manesar</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:14px">
+                        <p class="small">I build small apps, project demos, and learning tools. This site is a livable
+                            single-file portfolio with animations to stand out in class.</p>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="icon">📧</div>
+                                <div>
+                                    <div style="font-weight:600">Email</div>
+                                    <div class="small">bhardwajom002@gmail.com</div>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="icon">💻</div>
+                                <div>
+                                    <div style="font-weight:600">GitHub Pages</div>
+                                    <div class="small">bhardwajom002-source.github.io</div>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="icon">📍</div>
+                                <div>
+                                    <div style="font-weight:600">Address</div>
+                                    <div class="small">Hodal, District Palwal</div>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="icon">🎯</div>
+                                <div>
+                                    <div style="font-weight:600">Goal</div>
+                                    <div class="small">AI &amp; Software Developer — aim to top the class</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:16px;display:flex;gap:8px">
+                            <button id="btn-launch" class="btn">Launch Rocket</button>
+                            <button id="btn-tips" class="btn">Get Study Tip</button>
+                            <button id="btn-badge" class="btn">Generate Achievement</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rocket-wrap" id="rocket-card">
+                    <!-- simple rocket svg -->
+                    <svg class="rocket" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path d="M32 2c0 0-6 8-6 14s6 8 6 8 6-2 6-8-6-14-6-14z" fill="#ffd166"></path>
+                            <path d="M20 20c-3 6-2 14 4 20s18 6 24 0c6-6 6-14 2-20-8-12-34-6-30 0z" fill="#ef476f"></path>
+                            <path d="M28 42s-6 6-8 10c0 0 8 2 12 0s12 1 12 1-6-8-16-11z" fill="#118ab2"></path>
+                        </g>
+                    </svg>
+                    <div class="name-plate">OM BHARDWAJ</div>
+                </div>
+            </div>
+
+            <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+                <div class="card" style="flex:1">
+                    <div style="font-weight:700">Quick Projects</div>
+                    <div class="projects" id="projects">
+                        <div class="project">Calculator — JS practice</div>
+                        <div class="project">Student DB — HTML/CSS</div>
+                        <div class="project">Portfolio — This site</div>
+                    </div>
+                </div>
+
+                <div class="card" style="width:260px">
+                    <div style="font-weight:700">AI Helper</div>
+                    <div class="small">Use the "Study Tip" button for random tips, or "Generate Achievement" to create a
+                        shareable badge you can show your class.</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ABOUT / PAGE 2 -->
+        <main id="page-about" class="hidden">
+            <div class="card">
+                <div class="detail-header">
+                    <div>
+                        <h2 style="margin:0">About — Om Bhardwaj</h2>
+                        <div class="small">Diploma in Computer Science — Government Polytechnic Manesar</div>
+                    </div>
+                    <div>
+                        <button id="download-resume">Download Resume</button>
+                    </div>
+                </div>
+
+                <div class="badges">
+                    <div class="badge">Top Learner</div>
+                    <div class="badge">Project Maker</div>
+                    <div class="badge">AI Curious</div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+                    <div style="flex:1;min-width:280px">
+                        <h3>Contact &amp; Links</h3>
+                        <p style="margin:6px 0">Email: <a href="mailto:bhardwajom002@gmail.com">bhardwajom002@gmail.com</a></p>
+                        <p style="margin:6px 0">GitHub Pages: <a href="https://bhardwajom002-source.github.io/" target="_blank">bhardwajom002-source.github.io</a></p>
+                        <p style="margin:6px 0">Address: Hodal, District Palwal</p>
+                    </div>
+
+                    <div style="flex:1;min-width:280px">
+                        <h3>Skills &amp; Tools</h3>
+                        <ul>
+                            <li>HTML, CSS, JavaScript</li>
+                            <li>Beginner: Python, Git, GitHub</li>
+                            <li>Learning: AI basics, web apps</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:12px">Projects (links)</h3>
+                <div class="projects">
+                    <div class="project"><strong>Portfolio</strong>
+                        <div class="small">This page — single-file demo</div>
+                    </div>
+                    <div class="project"><strong>Student Manager</strong>
+                        <div class="small">A demo to store class records</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- CONTACT (quick) -->
+        <main id="page-contact" class="hidden">
+            <div class="card">
+                <h2>Contact</h2>
+                <p>Mail me at <a href="mailto:bhardwajom002@gmail.com">bhardwajom002@gmail.com</a> or visit my GitHub
+                    Pages link above.</p>
+                <p class="small">You can also create a PR on my GitHub to show your project contributions — teachers
+                    often notice collaboration.</p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="small">Built by Om — made to practice and impress. Save this file as <code>index.html</code> and
+                open it in your browser (or put under htdocs if using XAMPP).</div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple SPA navigation
+        const home = document.getElementById('page-home');
+        const about = document.getElementById('page-about');
+        const contact = document.getElementById('page-contact');
+        const links = {
+            'link-home': home,
+            'link-about': about,
+            'link-contact': contact
+        };
+        Object.keys(links).forEach(id => {
+            document.getElementById(id).addEventListener('click', e => {
+                e.preventDefault();
+                // hide all
+                [home, about, contact].forEach(p => p.classList.add('hidden'));
+                links[id].classList.remove('hidden');
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            })
+        })
+
+        // Launch rocket animation
+        const btnLaunch = document.getElementById('btn-launch');
+        const rocketCard = document.getElementById('rocket-card');
+        btnLaunch.addEventListener('click', () => {
+            rocketCard.classList.add('launch');
+            // reset after animation so user can relaunch
+            setTimeout(() => rocketCard.classList.remove('launch'), 4000);
+        })
+
+        // Study tips (tiny AI-like feature)
+        const tips = [
+            'Practice small problems every day for 30 minutes.',
+            'Explain what you learned to a friend — teaching helps memory.',
+            'Make a checklist before exams and revise the hardest topics first.',
+            'Build a mini project applying the concept you just learned.'
+        ];
+        document.getElementById('btn-tips').addEventListener('click', () => {
+            const tip = tips[Math.floor(Math.random() * tips.length)];
+            alert('Study tip: ' + tip);
+        });
+
+        // Achievement badge generator — creates a shareable PNG-like area (basic)
+        document.getElementById('btn-badge').addEventListener('click', () => {
+            const name = 'OM BHARDWAJ';
+            const title = 'Class Star — Study Achiever';
+            // create a new window with a printable badge
+            const html = `
+        <html><head><title>Achievement</title>
+        <style>body{background:#071129;color:#fff;font-family:Inter,Arial;text-align:center;padding:40px} .badge{display:inline-block;padding:30px;border-radius:16px;background:linear-gradient(90deg,#7c3aed,#06b6d4);box-shadow:0 12px 30px rgba(2,6,23,0.6)} h1{margin:0 0 6px} p{margin:0}</style></head>
+        <body><div class="badge"><h1>${name}</h1><p style="font-weight:700">${title}</p></div></body></html>`;
+            const w = window.open('', '_blank');
+            w.document.write(html);
+            w.document.close();
+        });
+
+        // Download resume placeholder
+        document.getElementById('download-resume').addEventListener('click', () => {
+            const text = 'Om Bhardwaj - Resume\nDiploma in Computer Science...\nContact: bhardwajom002@gmail.com';
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Om_Bhardwaj_Resume.txt';
+            a.click();
+        });
+    </script>
+
+
+</body></html>
