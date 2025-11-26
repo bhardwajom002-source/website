@@ -3,140 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Om Bhardwaj | Developer Portfolio</title>
+<title>Om Bhardwaj | Hackathon Portfolio</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-  body {
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: white;
-    overflow: hidden;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: background 1s ease;
-  }
-  h1 {
-    font-size: 2em;
-    font-style: italic;
-    font-weight: bold;
-    animation: float 3s ease-in-out infinite;
-  }
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-  }
-  .blink {
-    color: #00ffff;
-    font-weight: bold;
-    animation: blink 1s infinite;
-  }
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-  .loader {
-    border: 4px solid #fff;
-    border-top: 4px solid #00ffff;
-    border-radius: 50%;
-    width: 60px; height: 60px;
-    animation: spin 0.7s linear infinite;
-    display: none;
-  }
-  @keyframes spin {
-    100% { transform: rotate(360deg); }
-  }
-  .content { text-align: center; display: none; }
-  .contact a img {
-    width: 40px;
-    margin: 10px;
-    transition: transform 0.3s;
-  }
-  .contact a img:hover { transform: scale(1.2); }
-  .next-btn {
-    background: linear-gradient(90deg, red, yellow, cyan, magenta);
-    background-size: 400%;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    animation: glow 3s linear infinite;
-  }
-  @keyframes glow {
-    0% { background-position: 0%; }
-    100% { background-position: 400%; }
-  }
-  img.bg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    opacity: 0.15;
-  }
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{overflow-x:hidden;color:white;background:#080510;}
+
+/* ===== GLASS CARD ===== */
+.card{
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    padding:30px;
+    width:350px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.2);
+    margin-bottom:20px;
+}
+
+/* ===== INPUTS ===== */
+input{width:90%;padding:12px;margin:10px 0;background:rgba(255,255,255,0.1);border:none;color:white;border-radius:10px;outline:none;text-align:center;transition:0.3s;}
+input:focus{box-shadow:0 0 15px #00f2ff;}
+button{width:90%;padding:12px;margin-top:10px;background:#00f2ff;border:none;border-radius:10px;cursor:pointer;font-weight:bold;transition:0.4s;}
+button:hover{transform:scale(1.1);box-shadow:0 0 20px cyan;}
+
+/* ===== SECTIONS ===== */
+section{display:none;height:100vh;justify-content:center;align-items:center;flex-direction:column;text-align:center;padding:20px;}
+section.active{display:flex;transition:1s ease;}
+
+/* ===== TITLES ===== */
+h1{font-size:50px;text-shadow:0 0 20px cyan;margin-bottom:10px;}
+h2{font-size:40px;margin-bottom:20px;}
+
+/* ===== TYPEWRITER ===== */
+.typewriter{font-size:22px;margin-top:15px;border-right:2px solid #fff;width:0;white-space:nowrap;overflow:hidden;animation:typing 4s steps(50) infinite alternate;}
+@keyframes typing{from{width:0;}to{width:350px;}}
+
+/* ===== CONTACT ICONS ===== */
+.icons{display:flex;gap:25px;margin-top:20px;}
+.icons a{font-size:30px;transition:0.3s;color:white;}
+.icons a:hover{transform:scale(1.3);color:#00f2ff;}
+
+/* ===== LOGO IMAGE ===== */
+.logo{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:4px solid #00f2ff;
+    box-shadow:0 0 20px #00f2ff;
+    margin-bottom:20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.logo:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #00eaff;
+}
+
+/* ===== AI Assistant ===== */
+#aiChat{position:fixed;bottom:30px;right:30px;width:350px;background:#111;border-radius:15px;box-shadow:0 0 25px #00eaff;display:flex;flex-direction:column;overflow:hidden;z-index:1000;display:none;}
+#aiChatHeader{background:#00eaff;color:#111;padding:10px;font-weight:bold;cursor:pointer;text-align:center;}
+#chatBody{flex:1;padding:10px;background:#222;height:250px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;}
+#chatInputDiv{display:flex;}
+#chatInput{flex:1;padding:10px;border:none;background:#111;color:#fff;border-top:1px solid #333;}
+#chatSendBtn{padding:10px;border:none;background:#00eaff;color:#111;cursor:pointer;}
+.ai-btn{position:fixed;right:30px;bottom:30px;width:70px;height:70px;border-radius:50%;background:#bf00ff;color:#fff;font-size:30px;border:none;cursor:pointer;box-shadow:0 0 25px #bf00ff;animation:pulse 2s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 10px #bf00ff;}100%{box-shadow:0 0 40px #00eaff;}}
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader"></div>
-
-<!-- PAGE CONTENT -->
-<div class="content" id="page1">
-  <h1>Project Created by <span style="color:#00ffff;">Om Bhardwaj</span></h1>
-  <p class="blink">Government Polytechnic Manesar</p>
-  <br><br>
-  <div class="contact">
-    <a href="mailto:bhardwajom002@gmail.com"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_(2020).svg" alt="Gmail"></a>
-    <a href="https://www.linkedin.com/in/om-bhardwaj-222138253"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+<!-- ===== LOGIN SECTION ===== -->
+<section id="login" class="active">
+  <div class="card">
+    <img src="static/images/logo.png" alt="Om Bhardwaj Logo" class="logo">
+    <h2>🔐 Login</h2>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="checkLogin()">Login</button>
+    <p class="ai">AI Secured System</p>
   </div>
-  <br>
-  <button class="next-btn" onclick="nextPage(2)">Next</button>
+</section>
+
+<!-- ===== HOME SECTION ===== -->
+<section id="home">
+  <img src="static/images/logo.png" alt="Om Bhardwaj Logo" class="logo">
+  <h1>Om Bhardwaj</h1>
+  <p class="typewriter">Python • AI • Full Stack • ML • Web 3.0</p>
+  <button onclick="gotoSection('projects')">View Projects 🚀</button>
+</section>
+
+<!-- ===== PROJECTS SECTION ===== -->
+<section id="projects">
+  <h2>🚀 Projects</h2>
+  <div class="card">
+    <h3>AI Chatbot</h3>
+    <p>Python + NLP + Neural Networks</p>
+  </div>
+  <div class="card">
+    <h3>Data Dashboard</h3>
+    <p>Interactive AI Dashboard with Cloud Integration</p>
+  </div>
+  <button onclick="gotoSection('contact')">Contact 📩</button>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact">
+  <h2>📩 Contact Me</h2>
+  <div class="icons">
+    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:bhardwajom002@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="tel:+919817179377"><i class="fa-solid fa-phone"></i></a>
+  </div>
+</section>
+
+<!-- ===== AI CHATBOT ===== -->
+<div id="aiChat">
+  <div id="aiChatHeader" onclick="toggleChat()">AI Assistant 🤖</div>
+  <div id="chatBody"></div>
+  <div id="chatInputDiv">
+    <input type="text" id="chatInput" placeholder="Ask me anything...">
+    <button id="chatSendBtn" onclick="sendMessage()">Send</button>
+  </div>
 </div>
 
-<div class="content" id="page2">
-  <h1>My Aim</h1>
-  <p style="margin:20px;">My aim is to be the biggest developer of India and abroad.  
-  No developer is comparable to <b>Om Bhardwaj</b>.</p>
-  <img src="https://cdn.pixabay.com/photo/2021/10/18/14/45/artificial-intelligence-6720651_1280.jpg" class="bg">
-  <br><button class="next-btn" onclick="nextPage(3)">Next</button>
-</div>
-
-<div class="content" id="page3">
-  <h1>Creative Quadrant</h1>
-  <p style="margin:10px;">My Programming Languages:</p>
-  <p>☕ Java | 🐍 Python | 🌐 HTML | 💙 Flutter</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" class="bg">
-  <p style="margin-top:20px;font-style:italic;">AI + Innovation + Code = Om Bhardwaj</p>
-</div>
+<button class="ai-btn" onclick="toggleChat()">🤖</button>
 
 <script>
-let currentPage = 1;
-
-function showLoader() {
-  document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
-  document.getElementById('loader').style.display = 'block';
+// ===== LOGIN FUNCTION =====
+function checkLogin(){
+  let u=document.getElementById("username").value;
+  let p=document.getElementById("password").value;
+  if(u==="admin" && p==="12345"){
+    gotoSection('home');
+  } else {
+    alert("Wrong credentials!");
+  }
 }
 
-function hideLoader() {
-  document.getElementById('loader').style.display = 'none';
-  document.getElementById('page' + currentPage).style.display = 'block';
+// ===== SECTION NAVIGATION =====
+function gotoSection(id){
+  document.querySelectorAll("section").forEach(sec=>sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-function nextPage(pageNum) {
-  showLoader();
-  setTimeout(() => {
-    currentPage = pageNum;
-    hideLoader();
-  }, 700); // quick loader
+// ===== AI CHATBOT =====
+let chatVisible=false;
+function toggleChat(){
+  chatVisible=!chatVisible;
+  document.getElementById('aiChat').style.display = chatVisible?'flex':'none';
 }
+function sendMessage(){
+  let input=document.getElementById('chatInput').value.trim();
+  if(!input)return;
+  let chatBody=document.getElementById('chatBody');
+  let userMsg=document.createElement('div');
+  userMsg.textContent="You: "+input;
+  userMsg.style.alignSelf='flex-end';userMsg.style.background='#bf00ff';userMsg.style.padding='5px 10px';userMsg.style.borderRadius='10px';
+  chatBody.appendChild(userMsg);
 
-window.onload = () => {
-  hideLoader();
-};
+  let aiMsg=document.createElement('div');aiMsg.style.alignSelf='flex-start';aiMsg.style.background='#00eaff';aiMsg.style.padding='5px 10px';aiMsg.style.borderRadius='10px';
+  input=input.toLowerCase();
+  let response="Sorry, I don't understand.";
+  if(input.includes('hello')||input.includes('hi')) response="Hello! I'm your AI Assistant 🤖";
+  else if(input.includes('project')) response="I have multiple AI & Web3 projects showcased here.";
+  else if(input.includes('contact')) response="Reach me via LinkedIn, Gmail, YouTube or Phone.";
+  else if(input.includes('about')) response="I'm Om Bhardwaj, AI & Full Stack Developer!";
+  aiMsg.textContent="AI: "+response;
+  chatBody.appendChild(aiMsg);
+  document.getElementById('chatInput').value='';
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
 </script>
 </body>
 </html>
