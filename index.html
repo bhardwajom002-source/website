@@ -1,204 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Om Bhardwaj | Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Om Bhardwaj | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-html{scroll-behavior:smooth}
-body{color:#fff;background:#020617}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, Arial, sans-serif
+        }
 
-/* ===== COMMON BACKGROUND ===== */
-.section{
-min-height:100vh;
-padding:120px 80px;
-background:
-linear-gradient(rgba(2,6,23,.9),rgba(2,6,23,.95)),
-url("images/hero-bg.jpg") center/cover fixed no-repeat;
-}
+        html {
+            scroll-behavior: smooth
+        }
 
-/* ===== NAVBAR ===== */
-header{
-position:fixed;top:0;left:0;width:100%;z-index:999;
-padding:18px 70px;background:#020617;
-display:flex;justify-content:space-between;align-items:center
-}
-header h2 span{color:#22c55e}
-nav a{color:#fff;margin-left:28px;text-decoration:none}
-nav a:hover{color:#22c55e}
+        body {
+            color: #fff;
+            background: #020617
+        }
 
-/* ===== HERO ===== */
-.hero{display:flex;align-items:center}
-.hero h1{font-family:'Patrick Hand';font-size:68px}
-.hero h2{font-size:34px}
-.hero span{color:#22c55e;border-right:2px solid #22c55e;padding-right:6px}
+        /* ===== LOGIN UI ===== */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #020617, #020617cc), url('images/hero-bg.jpg') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000
+        }
 
-/* ===== TITLE ===== */
-.title{text-align:center;margin-bottom:60px}
-.title h2{font-family:'Patrick Hand';font-size:44px}
-.title span{color:#22c55e}
+        .login-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            padding: 50px 45px;
+            border-radius: 22px;
+            width: 360px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.35)
+        }
 
-/* ===== SERVICES ===== */
-.services{max-width:800px;margin:auto}
-.tabs{display:flex;justify-content:space-between;position:relative;margin-bottom:40px}
-.tabs div{cursor:pointer;padding:10px 15px}
-.indicator{position:absolute;bottom:-6px;left:0;width:25%;height:6px;background:#22c55e;transition:.4s}
-.service-box{background:#22c55e;color:#000;padding:40px;border-radius:14px;font-size:22px;text-align:center}
+        .login-box h2 {
+            font-size: 32px;
+            margin-bottom: 6px
+        }
 
-/* ===== SKILLS ===== */
-.skills{max-width:700px;margin:auto;background:#fff;color:#000;padding:50px;border-radius:16px}
-.skill{margin-bottom:25px}
-.bar{height:8px;background:#ccc;border-radius:6px}
-.fill{height:8px;background:#22c55e;border-radius:6px}
+        .login-sub {
+            font-size: 14px;
+            opacity: .8;
+            margin-bottom: 25px
+        }
 
-/* ===== TEAM ===== */
-.team{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
-.member{background:#000;padding:30px;text-align:center;border-radius:16px}
-.member img{width:130px;height:130px;border-radius:50%;border:4px solid #22c55e;margin-bottom:15px}
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 15px
+        }
 
-/* ===== PROJECTS ANIMATION ===== */
-.projects-box{text-align:center;font-size:34px;overflow:hidden}
-.fly{
-display:inline-block;
-animation:fly 3s infinite alternate ease-in-out
-}
-@keyframes fly{
-0%{transform:translateY(0);letter-spacing:0}
-100%{transform:translateY(-20px);letter-spacing:6px}
-}
+        .login-box input:focus {
+            outline: none;
+            box-shadow: 0 0 15px #22c55e
+        }
 
-/* ===== CONTACT ===== */
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:60px}
-.contact-item{margin-bottom:18px;font-size:18px}
-.contact-item a{color:#22c55e;text-decoration:none}
-input,textarea{width:100%;padding:12px;border:none;border-radius:6px;margin-bottom:15px}
-button{background:#22c55e;border:none;padding:12px 28px;font-size:16px;cursor:pointer}
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 12px;
+            background: #22c55e;
+            color: #000;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s
+        }
 
-@media(max-width:900px){
-.section{padding:120px 25px}
-header{padding:18px 25px}
-.team{grid-template-columns:1fr}
-.contact{grid-template-columns:1fr}
-}
-</style>
+        .login-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #22c55e
+        }
+
+        .hint {
+            margin-top: 15px;
+            font-size: 13px;
+            opacity: .8
+        }
+
+
+        /* ===== COMMON BACKGROUND ===== */
+        .section {
+            min-height: 100vh;
+            padding: 120px 80px;
+            background:
+                linear-gradient(rgba(2, 6, 23, .9), rgba(2, 6, 23, .95)),
+                url("images/hero-bg.jpg") center/cover fixed no-repeat;
+        }
+
+        /* ===== NAVBAR ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 18px 70px;
+            background: #020617;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        header h2 span {
+            color: #22c55e
+        }
+
+        nav a {
+            color: #fff;
+            margin-left: 28px;
+            text-decoration: none
+        }
+
+        nav a:hover {
+            color: #22c55e
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            display: flex;
+            align-items: center
+        }
+
+        .hero h1 {
+            font-family: 'Patrick Hand';
+            font-size: 68px
+        }
+
+        .hero h2 {
+            font-size: 34px
+        }
+
+        .hero span {
+            color: #22c55e;
+            border-right: 2px solid #22c55e;
+            padding-right: 6px
+        }
+
+        /* ===== TITLE ===== */
+        .title {
+            text-align: center;
+            margin-bottom: 60px
+        }
+
+        .title h2 {
+            font-family: 'Patrick Hand';
+            font-size: 44px
+        }
+
+        .title span {
+            color: #22c55e
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            max-width: 800px;
+            margin: auto
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px
+        }
+
+        .tabs div {
+            cursor: pointer;
+            padding: 10px 15px
+        }
+
+        .indicator {
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 25%;
+            height: 6px;
+            background: #22c55e;
+            transition: .4s
+        }
+
+        .service-box {
+            background: #22c55e;
+            color: #000;
+            padding: 40px;
+            border-radius: 14px;
+            font-size: 22px;
+            text-align: center
+        }
+
+        /* ===== SKILLS ===== */
+        .skills {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            color: #000;
+            padding: 50px;
+            border-radius: 16px
+        }
+
+        .skill {
+            margin-bottom: 25px
+        }
+
+        .bar {
+            height: 8px;
+            background: #ccc;
+            border-radius: 6px
+        }
+
+        .fill {
+            height: 8px;
+            background: #22c55e;
+            border-radius: 6px
+        }
+
+        /* ===== TEAM ===== */
+        .team {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px
+        }
+
+        .member {
+            background: #000;
+            padding: 30px;
+            text-align: center;
+            border-radius: 16px
+        }
+
+        .member img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid #22c55e;
+            margin-bottom: 15px
+        }
+
+        /* ===== PROJECTS ANIMATION ===== */
+        .projects-box {
+            text-align: center;
+            font-size: 34px;
+            overflow: hidden
+        }
+
+        .fly {
+            display: inline-block;
+            animation: fly 3s infinite alternate ease-in-out
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(0);
+                letter-spacing: 0
+            }
+
+            100% {
+                transform: translateY(-20px);
+                letter-spacing: 6px
+            }
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px
+        }
+
+        .contact-item {
+            margin-bottom: 18px;
+            font-size: 18px
+        }
+
+        .contact-item a {
+            color: #22c55e;
+            text-decoration: none
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 15px
+        }
+
+        button {
+            background: #22c55e;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            cursor: pointer
+        }
+
+        @media(max-width:900px) {
+            .section {
+                padding: 120px 25px
+            }
+
+            header {
+                padding: 18px 25px
+            }
+
+            .team {
+                grid-template-columns: 1fr
+            }
+
+            .contact {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-<h2>Portfolio<span>.</span></h2>
-<nav>
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#skills">Skills</a>
-<a href="#team">Team</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-</nav>
-</header>
+    <!-- ===== LOGIN OVERLAY ===== -->
+    <div id="loginOverlay">
+        <div class="login-box">
+            <h2>Welcome Back 👋</h2>
+            <p class="login-sub">Secure Admin Login</p>
+            <input type="text" id="loginUser" placeholder="Username">
+            <input type="password" id="loginPass" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
 
-<!-- HERO -->
-<section id="home" class="section hero">
-<div>
-<p>Hey, my name is</p>
-<h1>Om Bhardwaj</h1>
-<h2>I'm a <span id="typing"></span></h2>
-</div>
-</section>
 
-<!-- SERVICES -->
-<section id="services" class="section">
-<div class="title"><h2>My Services</h2><span>what i offer</span></div>
-<div class="services">
-<div class="tabs">
-<div onclick="setService(0)">Web Dev</div>
-<div onclick="setService(1)">App Dev</div>
-<div onclick="setService(2)">UI/UX</div>
-<div onclick="setService(3)">SEO</div>
-<div class="indicator" id="indicator"></div>
-</div>
-<div class="service-box" id="serviceBox">Professional Web Development</div>
-</div>
-</section>
+    <header>
+        <h2>Portfolio<span>.</span></h2>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Skills</a>
+            <a href="#team">Team</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-<!-- SKILLS -->
-<section id="skills" class="section">
-<div class="title"><h2>My Skills</h2><span>what i know</span></div>
-<div class="skills">
-<div class="skill">HTML<div class="bar"><div class="fill" style="width:90%"></div></div></div>
-<div class="skill">CSS<div class="bar"><div class="fill" style="width:85%"></div></div></div>
-<div class="skill">JavaScript<div class="bar"><div class="fill" style="width:80%"></div></div></div>
-</div>
-</section>
+    <!-- HERO -->
+    <section id="home" class="section hero">
+        <div>
+            <p>Hey, my name is</p>
+            <h1>Om Bhardwaj</h1>
+            <h2>I'm a <span id="typing"></span></h2>
+        </div>
+    </section>
 
-<!-- TEAM -->
-<section id="team" class="section">
-<div class="title"><h2>My Team</h2><span>who i'm with</span></div>
-<div class="team">
-<div class="member"><img src="images/om.jpg"><h3>Frontend Developer</h3></div>
-<div class="member"><img src="images/om.jpg"><h3>Full Stack Developer</h3></div>
-<div class="member"><img src="images/om.jpg"><h3>Designer</h3></div>
-</div>
-</section>
+    <!-- SERVICES -->
+    <section id="services" class="section">
+        <div class="title">
+            <h2>My Services</h2><span>what i offer</span>
+        </div>
+        <div class="services">
+            <div class="tabs">
+                <div onclick="setService(0)">Web Dev</div>
+                <div onclick="setService(1)">App Dev</div>
+                <div onclick="setService(2)">UI/UX</div>
+                <div onclick="setService(3)">SEO</div>
+                <div class="indicator" id="indicator"></div>
+            </div>
+            <div class="service-box" id="serviceBox">Professional Web Development</div>
+        </div>
+    </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="section">
-  <div class="title">
-    <h2>Projects</h2>
-    <span>what i've done</span>
-  </div>
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+        <div class="title">
+            <h2>My Skills</h2><span>what i know</span>
+        </div>
+        <div class="skills">
+            <div class="skill">HTML<div class="bar">
+                    <div class="fill" style="width:90%"></div>
+                </div>
+            </div>
+            <div class="skill">CSS<div class="bar">
+                    <div class="fill" style="width:85%"></div>
+                </div>
+            </div>
+            <div class="skill">JavaScript<div class="bar">
+                    <div class="fill" style="width:80%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="project-float">
-    E‑commerce &nbsp; • &nbsp; Portfolio &nbsp; • &nbsp; Dashboard
-  </div>
-</section>
+    <!-- TEAM -->
+    <section id="team" class="section">
+        <div class="title">
+            <h2>My Team</h2><span>who i'm with</span>
+        </div>
+        <div class="team">
+            <div class="member"><img src="images/om.jpg">
+                <h3>Frontend Developer</h3>
+            </div>
+            <div class="member"><img src="images/om.jpg">
+                <h3>Full Stack Developer</h3>
+            </div>
+            <div class="member"><img src="images/om.jpg">
+                <h3>Designer</h3>
+            </div>
+        </div>
+    </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
-<div class="title"><h2>Contact Me</h2><span>get in touch</span></div>
-<div class="contact">
-<div>
-<div class="contact-item">📧 <a href="mailto:bhardwajom002@gmail.com">bhardwajom002@gmail.com</a></div>
-<div class="contact-item">📞 <a href="tel:9817179377">9817179377</a></div>
-<div class="contact-item">▶ <a href="https://www.youtube.com/@officialbhardwaj4813" target="_blank">@officialbhardwaj4813</a></div>
-<div class="contact-item">🔗 <a href="https://www.linkedin.com/in/om-bhardwaj-222138253" target="_blank">LinkedIn Profile</a></div>
-</div>
-<div>
-<input placeholder="Name">
-<input placeholder="Email">
-<textarea placeholder="Message"></textarea>
-<button onclick="alert('Message sent! (demo)')">Send</button>
-</div>
-</div>
-</section>
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+        <div class="title">
+            <h2>Projects</h2>
+            <span>what i've done</span>
+        </div>
 
-<script>
-const words=["Full Stack Developer","Freelancer"];
-let i=0,j=0,del=false;
-const t=document.getElementById("typing");
-(function type(){
-if(!del && j<=words[i].length)t.textContent=words[i].slice(0,j++);
-else if(del && j>=0)t.textContent=words[i].slice(0,j--);
-if(j===words[i].length+1)del=true;
-if(j===0&&del){del=false;i=(i+1)%words.length}
-setTimeout(type,120);
-})();
+        <div class="project-float">
+            E‑commerce &nbsp; • &nbsp; Portfolio &nbsp; • &nbsp; Dashboard
+        </div>
+    </section>
 
-const texts=[
-"Professional Web Development",
-"Android & Web Applications",
-"Modern UI / UX Design",
-"SEO & Digital Marketing"
-];
-function setService(n){
-document.getElementById("serviceBox").innerText=texts[n];
-document.getElementById("indicator").style.left=(n*25)+'%';
-}
-</script>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <div class="title">
+            <h2>Contact Me</h2><span>get in touch</span>
+        </div>
+        <div class="contact">
+            <div>
+                <div class="contact-item">📧 <a href="mailto:bhardwajom002@gmail.com">bhardwajom002@gmail.com</a></div>
+                <div class="contact-item">📞 <a href="tel:9817179377">9817179377</a></div>
+                <div class="contact-item">▶ <a href="https://www.youtube.com/@officialbhardwaj4813"
+                        target="_blank">@officialbhardwaj4813</a></div>
+                <div class="contact-item">🔗 <a href="https://www.linkedin.com/in/om-bhardwaj-222138253"
+                        target="_blank">LinkedIn Profile</a></div>
+            </div>
+            <div>
+                <input placeholder="Name">
+                <input placeholder="Email">
+                <textarea placeholder="Message"></textarea>
+                <button onclick="alert('Message sent! (demo)')">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const words = ["Full Stack Developer", "Freelancer"];
+        let i = 0, j = 0, del = false;
+        const t = document.getElementById("typing");
+        (function type() {
+            if (!del && j <= words[i].length) t.textContent = words[i].slice(0, j++);
+            else if (del && j >= 0) t.textContent = words[i].slice(0, j--);
+            if (j === words[i].length + 1) del = true;
+            if (j === 0 && del) { del = false; i = (i + 1) % words.length }
+            setTimeout(type, 120);
+        })();
+
+        const texts = [
+            "Professional Web Development",
+            "Android & Web Applications",
+            "Modern UI / UX Design",
+            "SEO & Digital Marketing"
+        ];
+        function setService(n) {
+            document.getElementById("serviceBox").innerText = texts[n];
+            document.getElementById("indicator").style.left = (n * 25) + '%';
+        }
+
+
+        // ===== LOGIN LOGIC =====
+        function login() {
+            const u = document.getElementById('loginUser').value;
+            const p = document.getElementById('loginPass').value;
+            if (u === 'admin' && p === 'admin') {
+                document.getElementById('loginOverlay').style.display = 'none';
+            } else {
+                alert('❌ Invalid Username or Password');
+            }
+        }
+    </script>
 
 </body>
+
 </html>
